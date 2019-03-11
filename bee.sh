@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 PROJECT="Entitas"
-PLUGINS=(changelog dotnet doxygen git github tree utils version)
+PLUGINS=(changelog doxygen git github msbuild nspec tree utils version)
 RESOURCES=.bee
 
 source "${RESOURCES}"/entitas.sh
@@ -8,11 +8,6 @@ source "${RESOURCES}"/entitas.sh
 # changelog => version
 CHANGELOG_PATH=CHANGELOG.md
 CHANGELOG_CHANGES=CHANGES.md
-
-# dotnet
-DOTNET_SOLUTION="${PROJECT}.sln"
-DOTNET_TESTS_PROJECT=Tests/Tests/Tests.csproj
-DOTNET_TESTS_RUNNER=Tests/Tests/bin/Release/Tests.exe
 
 # doxygen => utils version
 DOXYGEN_EXPORT_PATH=docs
@@ -27,9 +22,16 @@ GITHUB_CHANGES=CHANGES.md
 GITHUB_RELEASE_PREFIX="${PROJECT} "
 GITHUB_REPO="sschmid/Entitas-CSharp"
 GITHUB_ATTACHMENTS_ZIP=("Build/dist/${PROJECT}.zip")
-if [[ -f "${HOME}/.bee/github" ]]; then
-  source "${HOME}/.bee/github"
+if [[ -f "${HOME}/.bee/github.sh" ]]; then
+  source "${HOME}/.bee/github.sh"
 fi
+
+# msbuild
+MSBUILD_SOLUTION="${PROJECT}.sln"
+
+# nspec => msbuild
+NSPEC_TESTS_PROJECT=Tests/Tests/Tests.csproj
+NSPEC_TESTS_RUNNER=Tests/Tests/bin/Release/Tests.exe
 
 # tree
 TREE_IGNORE="bin|obj|Library|Libraries|*Tests|Readme|ProjectSettings|Build|docs|Temp|Examples|*.csproj|*.meta|*.sln|*.userprefs|*.properties|tree.txt"
